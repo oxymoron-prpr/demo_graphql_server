@@ -1,0 +1,18 @@
+type Mutation {
+    calcPurchaseInf(customerId: ID!, 
+    price: String!, 
+    priceModifier: Float,! 
+    paymentMethod: String!, 
+    datetime: String!, 
+    additionalItem: AdditionalItemInput): PurchaseInf
+}
+
+input AdditionalItemInput {
+    last4: String
+    courier: String
+}
+
+type PurchaseInf {
+    finalPrice: Float
+    points: Int
+}

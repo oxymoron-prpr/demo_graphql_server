@@ -1,0 +1,10 @@
+type Query {
+    getSales(startDateTime: String!,
+              endDateTime: String!): [Sales]
+}
+
+type Sales {
+    datetime: String
+    sales: Float
+    points: Int
+}

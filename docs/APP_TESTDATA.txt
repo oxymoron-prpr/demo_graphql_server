@@ -1,0 +1,37 @@
+http://localhost:8080/graphiql　にアクセスすると
+GraphiQLの画面が表示されます。
+
+画面左に入力フィールドがあるので、下記のクエリを編集・挿入して動作検証してみてください。
+
+以下サンプル
+
+データ追加・ポイント、最終金額返却
+
+mutation test {
+  calcPurchaseInf(
+    customerId: "35348"
+    price: "5111.00"
+    priceModifier: 0.95
+    paymentMethod: VISA
+    datetime: "2022-09-07T00:00:00Z"
+    additionalItem: {last4: "1221"}
+  ) {
+    finalPrice
+    points
+  }
+}
+
+
+売上データ検索
+
+query test {
+  getSales(
+startDateTime: "2022-09-01T00:00:00Z"
+endDateTime: "2022-09-04T23:59:59Z"
+  )
+ {
+    datetime
+    sales
+    points
+  }
+}

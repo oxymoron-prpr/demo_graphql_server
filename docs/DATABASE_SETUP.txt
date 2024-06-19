@@ -1,0 +1,56 @@
+データベースの設定手順 
+PostgreSQLのインストールと起動
+以下の手順でWindows環境にPostgreSQLをインストールし、起動します。 
+
+1. PostgreSQLのインストール 
+- [PostgreSQLの公式ダウンロードページ](https://www.postgresql.org/download/windows/)にアクセスし、インストーラーをダウンロードします。 
+- ダウンロードしたインストーラーを実行し、画面の指示に従ってインストールを進めます。 
+- インストール中に、デフォルトのスーパーユーザー（postgres）とそのパスワードを設定します。このパスワードは後で使用するので覚えておいてください。
+
+2. PostgreSQLサービスの起動 
+インストールが完了したら、PostgreSQLサービスが自動的に起動します。
+必要に応じてサービスを手動で起動する場合は、以下の手順を実行します。 
+- 「サービス」アプリを開き、PostgreSQL サービスを見つけて「開始」をクリックします。 
+
+
+------------------------------------------------------------------------------------------------------
+PostgreSQLへの接続 
+PostgreSQLに接続するためにpsqlコマンドラインツールを使用します。
+ 
+1. PostgreSQLにログイン 
+PostgreSQLのインストール中に設定したパスワードを使用してログインします。 
+
+コマンド：
+psql -U postgres 
+
+2. データベースの作成 
+新しいデータベースを作成します。 
+
+コマンド：
+CREATE DATABASE graphql; 
+
+3. ユーザーの作成 
+新しいユーザーを作成し、データベースへの全権限を付与します。 
+
+コマンド：
+CREATE USER graphql WITH ENCRYPTED PASSWORD 'graphql'; 
+GRANT ALL PRIVILEGES ON DATABASE graphql TO graphql; 
+
+
+------------------------------------------------------------------------------------------------------
+テーブルの作成
+作成したデータベースに接続し、必要なテーブルを作成します。 
+
+1. データベースに接続 
+作成したデータベースに接続します。 
+
+コマンド：
+\c graphql 
+
+2. テーブルの作成 
+必要なテーブルを作成します。 
+
+コマンド：
+CREATE TABLE orders ( order_id SERIAL PRIMARY KEY, customer_id VARCHAR(255) NOT NULL, price DECIMAL(10, 2) NOT NULL, price_modifier DOUBLE PRECISION, payment_method VARCHAR(50), datetime TIMESTAMP, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, additional_info TEXT ); 
+
+これでデータベースの設定は完了です。
